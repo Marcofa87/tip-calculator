@@ -1,19 +1,29 @@
 import { useState } from "react";
+import "./index.css";
 
 function App() {
-  const [value, setValue] = useState("0");
+  const [value, setValue] = useState(0);
+  const [satisfaction, setSatisfaction] = useState(0);
+  const [satisfaction2, setSatisfaction2] = useState(0);
+
   return (
-    <>
+    <div className="container">
       <Bill value={value} onSetValue={setValue} />
-      <Percentage>
-        <p>How did you like the service</p>
+      <Percentage
+        onSatisfaction={satisfaction}
+        onSetSatisfaction={setSatisfaction}
+      >
+        <p className="question">How did you like the service</p>
       </Percentage>
-      <Percentage>
-        <p>How did your friend like the service?</p>
+      <Percentage
+        onSatisfaction={satisfaction2}
+        onSetSatisfaction={setSatisfaction2}
+      >
+        <p className="question">How did your friend like the service?</p>
       </Percentage>
       <Price value={value} />
       <Reset />
-    </>
+    </div>
   );
 }
 
@@ -34,16 +44,16 @@ function Bill({ value, onSetValue }) {
   );
 }
 
-function Percentage({ children }) {
-  const [satisfaction, setSatisfaction] = useState(0);
-  console.log(satisfaction);
+function Percentage({ children, onSatisfaction, onSetSatisfaction }) {
+  console.log(onSatisfaction);
 
   return (
     <>
       {children}
       <select
-        value={satisfaction}
-        onChange={(e) => setSatisfaction(Number(e.target.value))}
+        className="percentageSelect" // Applica la classe CSS qui
+        value={onSatisfaction}
+        onChange={(e) => onSetSatisfaction(Number(e.target.value))}
       >
         <option value={0}>Dissatisfied(0%)</option>
         <option value={5}>It was okay(5%)</option>
@@ -54,10 +64,12 @@ function Percentage({ children }) {
   );
 }
 
-function Price({ value }) {
+function Price({ value, onSatisfaction }) {
   return (
     <>
-      <p>You paid:${value} ($(X) + $(X) tip)</p>
+      <p className="price">
+        You paid: ${value} ($({value}) + $({onSatisfaction}) tip)
+      </p>
     </>
   );
 }
@@ -65,8 +77,9 @@ function Price({ value }) {
 function Reset() {
   return (
     <>
-      <button>Reset</button>
+      <button className="resetButton">Reset</button>
     </>
   );
 }
+
 export default App;

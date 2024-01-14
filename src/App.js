@@ -5,7 +5,9 @@ function App() {
   const [value, setValue] = useState(0);
   const [satisfaction, setSatisfaction] = useState(0);
   const [satisfaction2, setSatisfaction2] = useState(0);
+
   const showPrice = value > 0;
+
   function handleReset() {
     // eslint-disable-next-line no-restricted-globals
     confirm("Are you sure to reset all the values?");

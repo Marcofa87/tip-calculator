@@ -1,5 +1,9 @@
 import { useState } from "react";
 import "./index.css";
+import Reset from "./components/Reset";
+import Price from "./components/Price";
+import Percentage from "./components/Percentage";
+import Bill from "./components/Bill";
 
 function App() {
   const [value, setValue] = useState(0);
@@ -40,66 +44,6 @@ function App() {
       )}
       <Reset onhandleReset={handleReset} />
     </div>
-  );
-}
-
-function Bill({ value, onSetValue }) {
-  return (
-    <>
-      <label>
-        How much was the bill? {value}
-        <input
-          value={value}
-          type="text"
-          onChange={(e) => {
-            onSetValue(Number(e.target.value));
-          }}
-        ></input>
-      </label>
-    </>
-  );
-}
-
-function Percentage({ children, onSatisfaction, onSetSatisfaction }) {
-  console.log(onSatisfaction);
-
-  return (
-    <>
-      {children}
-      <select
-        className="percentageSelect" // Applica la classe CSS qui
-        value={onSatisfaction}
-        onChange={(e) => onSetSatisfaction(Number(e.target.value))}
-      >
-        <option value={0}>Dissatisfied(0%)</option>
-        <option value={5}>It was okay(5%)</option>
-        <option value={10}>It was good(10%)</option>
-        <option value={20}>It was amazing(20%)</option>
-      </select>
-    </>
-  );
-}
-
-function Price({ value, onSatisfaction, onSatisfactionFriend }) {
-  const tip = (value * (onSatisfaction + onSatisfactionFriend)) / 100;
-  const totalAmount = value + tip;
-
-  return (
-    <>
-      <p className="price">
-        You paid: ${totalAmount} ($({value}) + $({tip}) tip)
-      </p>
-    </>
-  );
-}
-
-function Reset({ onhandleReset }) {
-  return (
-    <>
-      <button className="resetButton" onClick={onhandleReset}>
-        Reset
-      </button>
-    </>
   );
 }
 

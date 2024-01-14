@@ -6,6 +6,12 @@ function App() {
   const [satisfaction, setSatisfaction] = useState(0);
   const [satisfaction2, setSatisfaction2] = useState(0);
 
+  function handleReset() {
+    setValue(0);
+    setSatisfaction(0);
+    setSatisfaction2(0);
+  }
+
   return (
     <div className="container">
       <Bill value={value} onSetValue={setValue} />
@@ -26,7 +32,7 @@ function App() {
         onSatisfaction={satisfaction}
         onSatisfactionFriend={satisfaction2}
       />
-      <Reset />
+      <Reset onhandleReset={handleReset} />
     </div>
   );
 }
@@ -81,10 +87,12 @@ function Price({ value, onSatisfaction, onSatisfactionFriend }) {
   );
 }
 
-function Reset() {
+function Reset({ onhandleReset }) {
   return (
     <>
-      <button className="resetButton">Reset</button>
+      <button className="resetButton" onClick={onhandleReset}>
+        Reset
+      </button>
     </>
   );
 }

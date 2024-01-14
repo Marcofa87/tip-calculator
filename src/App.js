@@ -21,7 +21,11 @@ function App() {
       >
         <p className="question">How did your friend like the service?</p>
       </Percentage>
-      <Price value={value} />
+      <Price
+        value={value}
+        onSatisfaction={satisfaction}
+        onSatisfactionFriend={satisfaction2}
+      />
       <Reset />
     </div>
   );
@@ -36,7 +40,7 @@ function Bill({ value, onSetValue }) {
           value={value}
           type="text"
           onChange={(e) => {
-            onSetValue(e.target.value);
+            onSetValue(Number(e.target.value));
           }}
         ></input>
       </label>
@@ -64,11 +68,14 @@ function Percentage({ children, onSatisfaction, onSetSatisfaction }) {
   );
 }
 
-function Price({ value, onSatisfaction }) {
+function Price({ value, onSatisfaction, onSatisfactionFriend }) {
+  const tip = (value * (onSatisfaction + onSatisfactionFriend)) / 100;
+  const totalAmount = value + tip;
+
   return (
     <>
       <p className="price">
-        You paid: ${value} ($({value}) + $({onSatisfaction}) tip)
+        You paid: ${totalAmount} ($({value}) + $({tip}) tip)
       </p>
     </>
   );

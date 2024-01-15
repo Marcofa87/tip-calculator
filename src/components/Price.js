@@ -4,7 +4,7 @@ export default function Price({ value, onSatisfaction, onSatisfactionFriend }) {
 
   return (
     <>
-      <p className="price">
+      <p className="price" style={tip > 10 ? { color: "blue" } : {}}>
         You paid: ${totalAmount} ($({value}) + $({tip}) tip)
       </p>
     </>

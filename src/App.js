@@ -14,7 +14,7 @@ function App() {
 
   function handleReset() {
     // eslint-disable-next-line no-restricted-globals
-    confirm("Are you sure to reset all the values?");
+    if (value > 0) confirm("Are you sure to reset all the values?");
     setValue(0);
     setSatisfaction(0);
     setSatisfaction2(0);
